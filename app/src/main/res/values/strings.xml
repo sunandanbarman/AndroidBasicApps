@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Media Player</string>
+    <string name="btn_pause">Pause</string>
+    <string name="btn_play">Play</string>
+    <string name="btn_next">Next</string>
+    <string name="no_songs">No Songs Available</string>
+</resources>

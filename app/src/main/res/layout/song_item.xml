@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<ListView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@+id/lvSongName"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textSize="@dimen/text_extra_large"-->
+    <!--android:textStyle="bold"-->
+    <!--android:ellipsize="end"-->
+    <!--android:text="SongName" />-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/songsList"
+    android:orientation="vertical"
+    android:layout_height="match_parent" >
+    <TextView
+        android:id="@+id/tvSongName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_extra_large"
+        android:textStyle="bold"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="SongName" />
+    <TextView
+        android:id="@+id/tvSongAlbum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_medium"
+        android:layout_below="@id/tvSongName"
+        android:ellipsize="end"
+        android:text="AlbumName" />
+
+</LinearLayout>
