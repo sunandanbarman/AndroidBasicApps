@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,8 +63,20 @@ public class MainActivity extends ListActivity {
     /*GUI elements*/
 //    private static ListView songListView;
     public static ImageButton btnStop, btnPlayPause, btnNext, btnPrev;
+    public static SeekBar seekBar;
     /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
-
+    /**/
+    public static void getNextSongCounter() {
+        songCounter = (songCounter+ 1 ) % songsList.size();
+    }
+    /**/
+    public static void getPrevSongCounter() {
+        songCounter = (songCounter -1) % songsList.size();
+        if (songCounter < 0) {
+            songCounter = songsList.size()-1; //roll over
+        }
+    }
+    /**/
     public static Context getAppContext() {
         return MainActivity.appContext;
     }
@@ -74,6 +87,8 @@ public class MainActivity extends ListActivity {
         try {
             mediaPlayer.reset();
             songCounter = songIndex;
+            
+            seekBar.setMax(Integer.valueOf(songsList.get(songIndex).getmSongDuration()));
             mediaPlayer.setDataSource(songsList.get(songIndex).getmSongFullPath());
             mediaPlayer.prepare();
             mediaPlayer.start();
@@ -117,7 +132,7 @@ public class MainActivity extends ListActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                songCounter = (songCounter+ 1 ) % songsList.size();
+                getNextSongCounter();
                 Log.e("Next","songCounter " + songCounter);
                 playSong(songCounter);
 
@@ -126,11 +141,36 @@ public class MainActivity extends ListActivity {
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                songCounter = (songCounter -1) % songsList.size();
-                if (songCounter < 0) {
-                    songCounter = songsList.size()-1; //roll over
-                }
+                getPrevSongCounter();
                 Log.e("Prev","songCounter " + songCounter);
+                playSong(songCounter);
+            }
+        });
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser && mediaPlayer.isPlaying()) {
+                    mediaPlayer.seekTo(progress);
+                }
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        /*Play next song automatically*/
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                getNextSongCounter();
                 playSong(songCounter);
             }
         });
@@ -150,6 +190,7 @@ public class MainActivity extends ListActivity {
             btnPlayPause = (ImageButton) findViewById(R.id.btnPause);
             btnNext = (ImageButton) findViewById(R.id.btnNext);
             btnPrev = (ImageButton) findViewById(R.id.btnPrev);
+            seekBar = (SeekBar) findViewById(R.id.seekBar);
             updatePlayList();
             createEventHandlers();
         } catch(Exception ex) {
@@ -224,4 +265,6 @@ public class MainActivity extends ListActivity {
     protected void onListItemClick(ListView List, View view, int position, long id) {
         playSong(position);
     }
+
+
 }
