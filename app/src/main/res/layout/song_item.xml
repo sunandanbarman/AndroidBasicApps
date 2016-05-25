@@ -11,24 +11,66 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:id="@+id/songsList"
-    android:orientation="vertical"
-    android:layout_height="match_parent" >
-    <TextView
-        android:id="@+id/tvSongName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_extra_large"
-        android:textStyle="bold"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:text="SongName" />
-    <TextView
-        android:id="@+id/tvSongAlbum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_medium"
-        android:layout_below="@id/tvSongName"
-        android:ellipsize="end"
-        android:text="AlbumName" />
+    android:orientation="horizontal"
+    android:background="@drawable/song_list_item_bg"
+    android:layout_height="wrap_content" >
 
+    <ImageView
+        android:id="@+id/img_listitem_file"
+        android:layout_width="60dip"
+        android:layout_height="60dip"
+        android:scaleType="fitXY"
+        android:src="@drawable/no_clipart" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvSongName"
+                android:textColor="@color/White"
+                android:textSize="@dimen/text_large"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="Dummy File"
+                android:maxLines="1"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvSongAlbum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Dummy Singer"
+                    android:textColor="@color/LightGrey"
+                    android:textSize="@dimen/text_normal" />
+
+                <TextView
+                    android:id="@+id/txt_listitem_duration"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/CadetBlue"
+                    android:text="1:40" />
+            </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
 </LinearLayout>

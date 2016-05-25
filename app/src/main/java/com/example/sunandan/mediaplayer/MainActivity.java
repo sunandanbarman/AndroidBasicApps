@@ -62,6 +62,7 @@ public class MainActivity extends ListActivity {
             MediaStore.Audio.Media.DURATION
     };
 
+    private static boolean bIsSongsPresent = false;
     private static List<Song> songsList;
     private static Handler mHandler;
     private static int seekBarInterval = 10;
@@ -120,6 +121,7 @@ public class MainActivity extends ListActivity {
             @Override
             public void onClick(View v) {
                 mediaPlayer.stop();
+                seekBar.setProgress(0);
                 btnPlayPause.setImageResource(R.drawable.ic_play_arrow_white_18dp);
             }
         });
@@ -195,6 +197,17 @@ public class MainActivity extends ListActivity {
 
     }
 
+    private void setButtonState(boolean enable) {
+        btnStop.setClickable(enable);
+        btnPlayPause.setClickable(enable);
+        btnNext.setClickable(enable);
+        btnPrev.setClickable(enable);
+
+        btnStop.setEnabled(enable);
+        btnPlayPause.setEnabled(enable);
+        btnNext.setEnabled(enable);
+        btnPrev.setEnabled(enable);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -209,6 +222,8 @@ public class MainActivity extends ListActivity {
             btnPlayPause = (ImageButton) findViewById(R.id.btnPause);
             btnNext = (ImageButton) findViewById(R.id.btnNext);
             btnPrev = (ImageButton) findViewById(R.id.btnPrev);
+
+            setButtonState(false);
             seekBar = (SeekBar) findViewById(R.id.seekBar);
 
             updatePlayList();
@@ -275,6 +290,9 @@ public class MainActivity extends ListActivity {
                     songsList.add(song);
                 } while (cur.moveToNext());
 
+                if (songsList.size() >0) {
+                    setButtonState(true);
+                }
                 /*Attach custom adapter to the listView*/
                 SongAdapter adapter = new SongAdapter(this, songsList);
                 // Attach the adapter to a ListView

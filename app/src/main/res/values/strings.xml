@@ -3,5 +3,7 @@
     <string name="btn_pause">Pause</string>
     <string name="btn_play">Play</string>
     <string name="btn_next">Next</string>
+    <string name="btn_prev">Prev</string>
+    <string name="btn_stop">Stop</string>
     <string name="no_songs">No Songs Available</string>
 </resources>

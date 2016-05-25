@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,7 @@ public class SongAdapter extends ArrayAdapter<Song> {
     private static class ViewHolder {
         TextView songName;
         TextView songAlbumName;
+        TextView songDuration;
     }
     public SongAdapter(Context context,List<Song> songs) {
         //this.songs = null;
@@ -57,6 +60,7 @@ public class SongAdapter extends ArrayAdapter<Song> {
             convertView             = inflater.inflate(R.layout.song_item, parent, false);
             viewHolder.songName     = (TextView) convertView.findViewById(R.id.tvSongName);
             viewHolder.songAlbumName= (TextView) convertView.findViewById(R.id.tvSongAlbum);
+            viewHolder.songDuration = (TextView) convertView.findViewById(R.id.txt_listitem_duration);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder)convertView.getTag();
@@ -64,6 +68,7 @@ public class SongAdapter extends ArrayAdapter<Song> {
         // Populate the data into the template view using the data object
         viewHolder.songName.setText(song.getmSongName());
         viewHolder.songAlbumName.setText(song.getmSongAlbumName());
+        viewHolder.songDuration.setText(Utilities.milliSecondsToTimer(Long.valueOf(song.getmSongDuration())));
         // Return the completed view to render on screen
         /*Generate onClick event for the view*/
         convertView.setOnClickListener(new View.OnClickListener() {

@@ -143,4 +143,5 @@
     <color name="DarkBlue">#00008B</color>
     <color name="Navy">#000080</color>
     <color name="Black">#000000</color>
+    <color name="darker_gray">#1F1D1E</color>
 </resources>
